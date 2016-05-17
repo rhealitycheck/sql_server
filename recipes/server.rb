@@ -114,10 +114,9 @@ end
 
 # If you have declared an agent account it will restart both the
 # agent service and the sql service. If not only the sql service
-if node['sql_server']['agent_account']
-  service agent_service_name do
-    action [:start, :enable]
-  end
+service agent_service_name do
+  action [:start, :enable]
+  only_if { node['sql_server']['agent_account'] }
 end
 
 service service_name do
